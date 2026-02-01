@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CASE-31 | 22 ОМБр Vehicle Debt Closure</title>
+  <link rel="stylesheet" href="../../assets/css/minimal.css">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --fg: #c9d1d9;
+      --accent: #58a6ff;
+      --critical: #f85149;
+      --border: #30363d;
+      --success: #3fb950;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.8rem; margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+    .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+    .badge-critical { background: var(--critical); color: white; }
+    .stat { background: #161b22; padding: 1rem; border: 1px solid var(--border); border-radius: 6px; margin: 1rem 0; }
+    .stat .label { display: block; color: #8b949e; font-size: 0.85rem; }
+    .stat .value { display: block; font-size: 2rem; font-weight: bold; font-family: monospace; }
+    .endpoint { background: #161b22; padding: 1rem; border: 1px solid var(--border); border-radius: 6px; margin: 1rem 0; }
+    .btn-primary { display: inline-block; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 500; background: var(--accent); color: white; margin: 0.5rem 0; }
+    code { background: #161b22; padding: 0.2rem 0.5rem; border-radius: 3px; font-family: monospace; }
+    pre { background: #161b22; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav style="margin-bottom: 2rem;">
+      <a href="../../" style="color: var(--accent);">010io</a> / 
+      <a href="../../" style="color: var(--accent);">support</a> / 
+      <span style="color: var(--fg);">case-31</span>
+    </nav>
+
+    <section>
+      <div>
+        <h1>CASE-31 <span class="badge badge-critical">P1-BLOCKER</span></h1>
+      </div>
+      <p style="font-family: monospace; color: #8b949e;">
+        <code>git commit -m "debt.close(115000.UAH) → state.UNENCUMBERED"</code>
+      </p>
+    </section>
+
+    <section>
+      <div class="stat">
+        <span class="label">Target</span>
+        <span class="value">115,000 UAH</span>
+      </div>
+      <div class="stat">
+        <span class="label">Raised</span>
+        <span class="value" id="raised">0 UAH</span>
+      </div>
+      <div class="stat">
+        <span class="label">Status</span>
+        <span class="value">ACTIVE_COLLECTING</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Payment Endpoints</h2>
+      <div class="endpoint">
+        <strong>Monobank Jar</strong><br>
+        <a href="https://send.monobank.ua/jar/7Y88YyV1uA" target="_blank" class="btn-primary">
+          Donate via Monobank →
+        </a>
+      </div>
+      <div class="endpoint">
+        <strong>Card Direct</strong><br>
+        <code>4874 1000 2432 9586</code>
+      </div>
+      <div class="endpoint">
+        <strong>Binance Pay</strong><br>
+        <code>252065035</code>
+      </div>
+      <div class="endpoint">
+        <strong>Bitcoin</strong><br>
+        <code style="font-size: 0.8rem;">1LEH67k3fbTyo4r1EFtz15zcoMQLJFpCLz</code>
+      </div>
+    </section>
+
+    <section>
+      <h2>Mission Brief</h2>
+      <p>
+        Operational combat vehicle deployed with <strong>22nd Separate Mechanized Brigade</strong> 
+        on Sumy front. Asset currently operational but financially encumbered (115k UAH lien).
+      </p>
+      <p>
+        <strong>Risk:</strong> Asset seizure if debt unpaid. Vehicle performs critical logistics, 
+        personnel rotation, casualty evacuation (200/300), and supply transport.
+      </p>
+      <p>
+        <strong>Objective:</strong> Close debt gap to unencumber asset for full operational capability 
+        without administrative blockers.
+      </p>
+    </section>
+
+    <section>
+      <h2>Asset Specification</h2>
+      <pre><code>resource "combat_vehicle" "case31_mobility_unit" {
+  lifecycle_state       = "deployed_operational"
+  financial_encumbrance = "115000_uah_lien"
+  location_sector       = "sumy_operational_area"
+  unit_assignment       = "22_ombr_1mbg"
+  
+  capabilities = [
+    "personnel_rotation",
+    "ammunition_transport", 
+    "casualty_evacuation_300",
+    "wounded_evacuation_200"
+  ]
+  
+  depends_on = [debt_closure.uah_115k]
+}</code></pre>
+    </section>
+  </div>
+</body>
+</html>
